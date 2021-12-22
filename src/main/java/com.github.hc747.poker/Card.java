@@ -20,6 +20,10 @@ public class Card implements Comparable<Card> {
         return rank;
     }
 
+    public int strength() {
+        return rank.ordinal();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

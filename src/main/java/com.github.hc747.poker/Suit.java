@@ -1,11 +1,18 @@
 package com.github.hc747.poker;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.stream.Stream;
+
 public enum Suit {
     CLUB('C'),
     HEART('H'),
     SPADE('S'),
     DIAMOND('D')
     ;
+
+    private static final Collection<Suit> ALL = Collections.unmodifiableSet(EnumSet.allOf(Suit.class));
 
     private final char character;
 
@@ -33,5 +40,13 @@ public enum Suit {
 
     public static Suit parseJava8(char character) {
         return Utilities.find(Suit.values(), suit -> suit.character == character);
+    }
+
+    public static Collection<Suit> elements() {
+        return ALL;
+    }
+
+    public static Stream<Suit> stream() {
+        return elements().stream();
     }
 }

@@ -1,5 +1,10 @@
 package com.github.hc747.poker;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.stream.Stream;
+
 public enum Rank {
     TWO('2'),
     THREE('3'),
@@ -15,6 +20,8 @@ public enum Rank {
     KING('K'),
     ACE('A')
     ;
+
+    private static final Collection<Rank> ALL = Collections.unmodifiableSet(EnumSet.allOf(Rank.class));
 
     private final char character;
 
@@ -42,5 +49,13 @@ public enum Rank {
 
     public static Rank parseJava8(char character) {
         return Utilities.find(Rank.values(), rank -> rank.character == character);
+    }
+
+    public static Collection<Rank> elements() {
+        return ALL;
+    }
+
+    public static Stream<Rank> stream() {
+        return elements().stream();
     }
 }

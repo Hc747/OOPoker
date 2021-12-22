@@ -29,14 +29,26 @@ public class Dealer {
     }
 
     public static List<Card> build() {
-        // each invocation of values creates a new array, therefore we store a local reference
-        final Suit[] suits = Suit.values();
-        final Rank[] ranks = Rank.values();
-        final List<Card> cards = new ArrayList<>(suits.length * ranks.length);
+        final Collection<Suit> suits = Suit.elements();
+        final Collection<Rank> ranks = Rank.elements();
+        final List<Card> cards = new ArrayList<>(suits.size() * ranks.size());
         for (Suit suit : suits) {
             for (Rank rank : ranks) {
                 cards.add(new Card(suit, rank));
             }
+        }
+        return cards;
+    }
+
+    public static List<Card> parse(String line) {
+        final StringTokenizer tokenizer = new StringTokenizer(line);
+        final List<Card> cards = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()) {
+            final String token = tokenizer.nextToken();
+            if (token.length() != 2) throw new IllegalArgumentException("Input not in expected format - each token must be two characters.");
+            final Rank rank = Rank.parseJava8(token.charAt(0));
+            final Suit suit = Suit.parseJava8(token.charAt(1));
+            cards.add(new Card(suit, rank));
         }
         return cards;
     }
