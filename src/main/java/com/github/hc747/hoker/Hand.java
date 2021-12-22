@@ -1,4 +1,4 @@
-package com.github.hc747.poker;
+package com.github.hc747.hoker;
 
 import java.util.*;
 import java.util.function.Function;
